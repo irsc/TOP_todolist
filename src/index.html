@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To do List</title>
+</head>
+<body class="grid-body">
+    <aside class="flex-aside">
+        <div class="user flex-spacebt">
+            <div>
+                <img src="" alt="">image
+                <p>Fulanito</p>
+            
+            </div>
+            <div> icon icon</div>
+        </div>
+        <div class="general actions-list">
+            
+            <button id="newTodoBtn"><span>Add Todo</span></button>
+            <button><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+            <button>Today</button>
+            <button>All</button>
+            <button>Upcoming</button>
+           
+        </div>
+        <div class="projects">
+            <h3>Projects</h3>
+            <ul id="projectList">
+            </ul>
+            <div class="actions-list">
+                <button id="newProjectBtn"><span>Add Project</span></button>
+            </div>
+        </div>
+    </aside>
+    <dialog id="newTodoModal">
+        <form id="newTodoForm" method="dialog">
+            <legend>
+                <h2>New task to do</h2>
+            </legend>
+            <label for="title">Title:</label>
+            <input id="title" type="text" pattern="[A-zÀ-ú\s]{2,30}" required>
+            
+            <label for="description">Description:</label>
+            <input id="description" type="text" pattern="[A-zÀ-ú\s]{2,90}" required>
+            
+            <label for="dueDate">Due date:</label>
+            <input id="dueDate" type="date" required>
+
+            <label for="priority">Priority:</label>
+            <select name="priority" id="priority">
+                <option value="high">High</option>
+                <option value="medium" selected>Medium</option>
+                <option value="low">Low</option>
+            </select>
+
+            <label for="notes">Notes:</label>
+            <textarea name="notes" id="notes" cols="30" rows="10" placeholder="Enter your notes here"></textarea>
+
+            <button type="reset"  id="closeBtn">Cancel</button>
+            <button id="addTodoBtn">Add new task</button>
+        
+        </form>
+
+    </dialog>
+    <main>
+        <nav class="flex-end"> Filter</nav>
+        <header id="header">Today</header>
+        <section id=""></section>
+    </main>
+</body>
+<script src="https://kit.fontawesome.com/4c536a6bd5.js" crossorigin="anonymous"></script>
+</html>

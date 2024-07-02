@@ -1,0 +1,54 @@
+
+aside{
+    background-color: lime;
+    height: 100vh;
+}
+main{
+    background-color: magenta;
+    height: 100vh;
+}
+
+ul{
+    list-style-type:none;
+}
+
+
+.icon{
+    height: 2em;
+}
+
+.grid-body{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+.flex-spacebt{
+    display: flex;
+    justify-content: space-between;
+}
+.flex-end{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.actions-list{
+    padding: 1em;
+}
+
+.actions-list button{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    margin-top: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: transparent;
+    border: none;
+}
+
+
+.actions-list button:hover{
+    background-color: lightgreen;
+    border-radius: 5px;
+    color: blue;
+}

@@ -1,0 +1,31 @@
+{
+  "devDependencies": {
+    "css-loader": "^7.1.2",
+    "date-fns": "^3.6.0",
+    "html-webpack-plugin": "^5.6.0",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.92.1",
+    "webpack-cli": "^5.1.4"
+  },
+  "name": "top_todolist",
+  "description": "Repo for to do list using JS skills learnt so far in TOP",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/irsc/TOP_todolist.git"
+  },
+  "keywords": [
+    "javascript"
+  ],
+  "author": "IRSC",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/irsc/TOP_todolist/issues"
+  },
+  "homepage": "https://github.com/irsc/TOP_todolist#readme"
+}
