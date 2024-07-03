@@ -1,15 +1,36 @@
-import circleAddIcon from './icons/circle-add.svg';
+import circleAddSvg from './icons/circle-add.svg';
+import folderPlusSvg from './icons/folder-plus.svg';
+import searchSvg from './icons/search.svg';
+import todoTodaySvg from './icons/calendar-today.svg';
+import todoAllSvg from './icons/cube-all.svg';
+import todoUpcomingSvg from './icons/next.svg';
+import './dom-elements';
 
-const addTodo = document.getElementById("newTodoBtn");
-const addProject = document.getElementById("newProjectBtn");
-const circleAddTodo = new Image();
-const circleAddProject = new Image();
+const iconAddTodo = new Image();
+const iconAddProject = new Image();
+const iconTodoSearch = new Image();
+const iconTodoToday = new Image();
+const iconTodoAll = new Image();
+const iconTodoUpcoming = new Image();
 
-circleAddTodo.classList.add("icon");
-circleAddProject.classList.add("icon");
-circleAddTodo.src = circleAddIcon;
-circleAddProject.src = circleAddIcon;
+iconAddTodo.classList.add("icon");
+iconAddProject.classList.add("icon");
+iconTodoSearch.classList.add("icon");
+iconTodoToday.classList.add("icon");
+iconTodoAll.classList.add("icon");
+iconTodoUpcoming.classList.add("icon");
 
-addTodo.prepend(circleAddTodo);
-addProject.prepend(circleAddProject);
+iconAddTodo.src = circleAddSvg;
+iconAddProject.src = folderPlusSvg;
+iconTodoSearch.src = searchSvg;
+iconTodoToday.src = todoTodaySvg;
+iconTodoAll.src = todoAllSvg;
+iconTodoUpcoming.src = todoUpcomingSvg;
+
+newTodoBtn.prepend(iconAddTodo);
+newProjectBtn.prepend(iconAddProject);
+todoSearch.prepend(iconTodoSearch);
+todoToday.prepend(iconTodoToday);
+todoAll.prepend(iconTodoAll);
+todoUpcoming.prepend(iconTodoUpcoming);
 

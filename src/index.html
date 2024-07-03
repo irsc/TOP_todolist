@@ -19,23 +19,22 @@
         <div class="general actions-list">
             
             <button id="newTodoBtn"><span>Add Todo</span></button>
-            <button><i class="fa-solid fa-magnifying-glass"></i> Search</button>
-            <button>Today</button>
-            <button>All</button>
-            <button>Upcoming</button>
+            <button id="todoSearch"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+            <button id="todoToday">Today</button>
+            <button id="todoAll">All</button>
+            <button id="todoUpcoming">Upcoming</button>
            
         </div>
         <div class="projects">
             <h3>Projects</h3>
-            <ul id="projectList">
-            </ul>
             <div class="actions-list">
                 <button id="newProjectBtn"><span>Add Project</span></button>
+                <div id="projectList" ></div>
             </div>
         </div>
     </aside>
-    <dialog id="newTodoModal">
-        <form id="newTodoForm" method="dialog">
+    <dialog id="newTodoModal" class="newItemModal">
+        <form id="newTodoForm" class="newItemForm" method="dialog">
             <legend>
                 <h2>New task to do</h2>
             </legend>
@@ -43,7 +42,7 @@
             <input id="title" type="text" pattern="[A-zÀ-ú\s]{2,30}" required>
             
             <label for="description">Description:</label>
-            <input id="description" type="text" pattern="[A-zÀ-ú\s]{2,90}" required>
+            <input id="description" type="text" pattern="[A-zÀ-ú\s]{2,90}">
             
             <label for="dueDate">Due date:</label>
             <input id="dueDate" type="date" required>
@@ -55,6 +54,10 @@
                 <option value="low">Low</option>
             </select>
 
+            <label for="project">Project:</label>
+            <select name="project" id="project">
+            </select>
+
             <label for="notes">Notes:</label>
             <textarea name="notes" id="notes" cols="30" rows="10" placeholder="Enter your notes here"></textarea>
 
@@ -64,10 +67,24 @@
         </form>
 
     </dialog>
+    <dialog id="newProjectModal" class="newItemModal">
+        <form id="newProjectForm" class ="newItemForm" method="dialog">
+            <legend>
+                <h2>New Project</h2>
+            </legend>
+            <label for="nameProject">Name:</label>
+            <input id="nameProject" type="text" pattern="[A-zÀ-ú\s]{2,30}" required>
+            
+            <button type="reset"  id="closeBtnProjectModal">Cancel</button>
+            <button id="addProjectBtn">Add new project</button>
+        
+        </form>
+
+    </dialog>
     <main>
-        <nav class="flex-end"> Filter</nav>
+        <nav id="nav" class="flex-end"> Filter</nav>
         <header id="header">Today</header>
-        <section id=""></section>
+        <section id="content"></section>
     </main>
 </body>
 <script src="https://kit.fontawesome.com/4c536a6bd5.js" crossorigin="anonymous"></script>

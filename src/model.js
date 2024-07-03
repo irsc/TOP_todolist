@@ -1,3 +1,4 @@
+import {format, isFuture} from "../node_modules/date-fns";
 //functions
 
 export class TodoList {
@@ -10,6 +11,23 @@ export class TodoList {
     addTask(task) {
         this.tasks.push(task);
     }
+
+    getTaskByProject(projectTitle){
+        const list = this.getAllTasks();
+        return list.filter(task => task.getProject() === projectTitle);
+    }
+
+    getTodayTasks(){
+        const today = format(new Date(),"yyyy-MM-dd");
+        const list = this.getAllTasks();
+        return list.filter(task => task.getDueDate() === today);
+    }
+    getUpcomingTasks(){
+        const list = this.getAllTasks();
+        return list.filter(task => isFuture(task.getDueDate()));
+    }
+
+
 };
 
 export class Project{
@@ -25,11 +43,12 @@ export class Project{
 }
 
 export class Task {
-    constructor(title, description, dueDate, priority, notes, completed = false) {
+    constructor(title, description, dueDate, priority, project, notes, completed = false) {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
+        this.project = project;
         this.notes = notes;
         this.completed = completed;
     }
@@ -39,6 +58,14 @@ export class Task {
         } else if (this.completed == true) {
             this.completed = false;
         }
+    }
+
+    getProject(){
+        return this.project;
+    }
+
+    getDueDate(){
+        return this.dueDate;
     }
 };
 
