@@ -1,0 +1,57 @@
+.sectionContent{
+    padding: 10px;
+}
+.headerContent{
+    color: darkred;
+    padding: 1em;
+    font-size: 2em;
+}
+.info-message{
+    color: dimgray;
+    font-size: 1.25em;
+    padding: 20px;
+}
+
+.task{
+    padding: 10px;
+}
+
+.flex-task-name{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 10px 20px 5px;
+    border-top: solid grey 1px;
+}
+.flex-task-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px 20px;
+    font-size: 0.75em;
+    color: dimgray;
+}
+
+.circle-task{
+    border-radius: 1em;
+    width: 1em;
+    height: 1em;
+    border: solid blue 2px;
+    margin-right: 20px;
+}
+.circle-task:hover{
+    background-color:lightgreen;
+    border: solid green 2px
+}
+
+.marked{
+    background-image: url(./icons/check-circle.svg);
+    background-size: 2em;
+    background-position: center;
+    border-radius: 1em;
+    width: 1em;
+    height: 1em;
+    border: solid darkgreen 2px;
+    margin-right: 20px;
+    background-color:lightgreen;
+}

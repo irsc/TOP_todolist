@@ -7,7 +7,6 @@ aside{
     height: 100vh;
 }
 main{
-    background-color: magenta;
     height: 100vh;
 }
 
@@ -29,6 +28,11 @@ ul{
     margin-right: 5px;
 }
 
+.large-icon{
+    height: 3em;
+    margin-right: 5px;
+}
+
 .grid-body{
     display: grid;
     grid-template-columns: 1fr 4fr;
@@ -46,6 +50,10 @@ ul{
     padding: 1em;
 }
 
+.text-large{
+    font-size: 1.5em;
+}
+
 .actions-list button{
     display: flex;
     flex-direction: row;
@@ -57,10 +65,33 @@ ul{
     background-color: transparent;
     border: none;
 }
+#newTodoBtnPanel{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 5px;
+    padding: 5px 15px 5px 0px;
+    background-color: transparent;
+    border: none;
+}
+
+#sectionContent+div{
+    margin-left: 20px;
+    margin-right: 20px;
+    border-top: solid grey 1px;
+}
 
 
-.actions-list button:hover{
+
+.actions-list button:hover {
     background-color: lightgreen;
     border-radius: 5px;
-    color: blue;
+    color: darkgreen;
 }
+
+#newTodoBtnPanel:hover {
+    border-radius: 5px;
+    border: solid lightgreen 2px;
+    color: green;
+}
+

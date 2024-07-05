@@ -1,5 +1,5 @@
 import { TodoList, Project, Task} from "./model";
-import { selectProject, showProjects } from "./view"; 
+import { selectProject, showProjects, loadPage, loadProjectsPage } from "./view"; 
 import './dom-elements';
 import {format} from "../node_modules/date-fns";
 
@@ -21,6 +21,8 @@ const newProjectModal = document.getElementById("newProjectModal");
 const newProjectTitle = document.getElementById("nameProject");
 const addProjectBtn = document.getElementById("addProjectBtn");
 const closeBtnProjectModal = document.getElementById("closeBtnProjectModal");
+//Todos panel
+const newTodoBtnPanel = document.getElementById("newTodoBtnPanel");
 
 //Listeners
 //Actions
@@ -38,6 +40,14 @@ todoAll.addEventListener("click", ()=>{
 });
 todoUpcoming.addEventListener("click", ()=>{
     upcomingPage();
+});
+
+asideProjects.addEventListener("click", ()=>{
+    allProjectsPage();
+});
+
+newTodoBtnPanel.addEventListener("click", ()=>{
+    newTodoModal.showModal();
 });
 
 
@@ -71,7 +81,7 @@ closeBtnProjectModal.addEventListener("click", ()=>{
 function addNewTask(title, description, dueDate, priority, project, notes){
     let task = new Task(title, description, dueDate, priority, project, notes)
     TodoModel.addTask(task);
-    console.log(TodoModel.getAllTasks());
+    loadPage(TodoModel.getAllTasks());
     /* printBookCards();
     resetVariables(); */
 };
@@ -83,7 +93,7 @@ function addNewProject(title){
 
     const newProject = document.getElementById(title);
     newProject.addEventListener("click", ()=>{
-        projectPage(title);
+        byProjectPage(title);
     });
 };
 
@@ -93,39 +103,32 @@ function searchPage(){
 
 function todayPage(){
     let lista = TodoModel.getTodayTasks();
-    if (lista.length == 0){
-        console.log("No task assigned today");
-    }else{
-        console.log(lista);
-    }
+    loadPage(lista,"Today","No tasks for today");
 };
 
 function allPage(){
     let lista = TodoModel.getAllTasks();
-    console.log(lista);
+    loadPage(lista);
 };
 
 function upcomingPage(){
     let lista = TodoModel.getUpcomingTasks();
-    if (lista.length == 0){
-        console.log("No upcoming");
-    }else{
-        console.log(lista);
-    }
+    loadPage(lista,"Upcoming","No upcoming tasks");
 };
 
-function projectPage(project){
+function byProjectPage(project){
     let lista = TodoModel.getTaskByProject(project);
-    if (lista.length == 0){
-        console.log("No task assigned to this project");
-    }else{
-        console.log(lista);
-    }
-    
+    let title = "Project " +  project;
+    loadPage(lista,title,"No task assigned to this project");
 };
+
+function allProjectsPage(){
+    loadProjectsPage(tasksProjects);
+}
 
 
 window.addEventListener("load", ()=>{
     showProjects(tasksProjects.getAllProjects());
     selectProject(tasksProjects.getAllProjects());
+    loadPage(TodoModel.getAllTasks());
 });

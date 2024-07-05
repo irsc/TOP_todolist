@@ -43,29 +43,38 @@ export class Project{
 }
 
 export class Task {
-    constructor(title, description, dueDate, priority, project, notes, completed = false) {
+    constructor(title, description, dueDate, priority, project, notes, status = false) {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
         this.project = project;
         this.notes = notes;
-        this.completed = completed;
-    }
-    completedStatus() {
-        if (this.completed == false) {
-            this.completed = true;
-        } else if (this.completed == true) {
-            this.completed = false;
-        }
+        this.status = status;
     }
 
+    getTitle(){
+        return this.title;
+    }
     getProject(){
         return this.project;
     }
-
     getDueDate(){
         return this.dueDate;
+    }
+    getPriority(){
+        return this.priority;
+    }
+    getStatus(){
+        return this.status;
+    }
+
+    setStatus(){
+        if(this.status){
+            this.status = false;
+        }else{
+            this.status = true;
+        }
     }
 };
 
