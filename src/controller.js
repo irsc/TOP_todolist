@@ -1,7 +1,6 @@
 import { TodoList, Project, Task} from "./model";
 import { selectProject, showProjects, loadPage, loadProjectsPage } from "./view"; 
 import './dom-elements';
-import {format} from "../node_modules/date-fns";
 
 const TodoModel = new TodoList();
 const tasksProjects = new Project();
@@ -23,6 +22,7 @@ const addProjectBtn = document.getElementById("addProjectBtn");
 const closeBtnProjectModal = document.getElementById("closeBtnProjectModal");
 //Todos panel
 const newTodoBtnPanel = document.getElementById("newTodoBtnPanel");
+
 
 //Listeners
 //Actions
@@ -49,6 +49,8 @@ asideProjects.addEventListener("click", ()=>{
 newTodoBtnPanel.addEventListener("click", ()=>{
     newTodoModal.showModal();
 });
+
+
 
 
 //Add task modal
@@ -82,8 +84,7 @@ function addNewTask(title, description, dueDate, priority, project, notes){
     let task = new Task(title, description, dueDate, priority, project, notes)
     TodoModel.addTask(task);
     loadPage(TodoModel.getAllTasks());
-    /* printBookCards();
-    resetVariables(); */
+    resetVariables();
 };
 
 function addNewProject(title){
@@ -95,6 +96,8 @@ function addNewProject(title){
     newProject.addEventListener("click", ()=>{
         byProjectPage(title);
     });
+    allProjectsPage();
+    resetVariables();
 };
 
 function searchPage(){
@@ -123,7 +126,24 @@ function byProjectPage(project){
 };
 
 function allProjectsPage(){
-    loadProjectsPage(tasksProjects);
+    loadProjectsPage(tasksProjects.getAllProjects());
+    let projectPanel = document.querySelectorAll(".project-panel");
+    projectPanel.forEach(element => {
+        console.log(element);
+      element.addEventListener('click', () => {
+        byProjectPage(element.innerText)
+      });
+    });
+}
+
+function resetVariables(){
+    newTodoTitle.innerText = "";
+    newTodoDescription.innerText = "";
+    newTodoDueDate.innerText = "";
+    newTodoPriority.seletedIndex =  -1;
+    newTodoProject.seletedIndex =  -1;
+    newTodoNotes.innerText = "";
+    newProjectTitle.innerText = "";
 }
 
 

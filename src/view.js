@@ -54,8 +54,10 @@ export function loadPage(taskArray, title="All", message="No tasks pending"){
             }else{
                 spanCircle.classList.add("circle-task");
             }
-            if(sectionContent.classList.contains("info-message")){
-                sectionContent.classList.remove("info-message");
+            if(task.getPriority().toLowerCase() == "high"){
+                spanCircle.classList.add("task-high-priority");
+            }else if(task.getPriority().toLowerCase() == "medium"){
+                spanCircle.classList.add("task-medium-priority");
             }
             spanName.innerText = task.getTitle();
             spanDueDate.innerText = task.getDueDate();
@@ -77,6 +79,9 @@ export function loadPage(taskArray, title="All", message="No tasks pending"){
             })
 
         });
+        if(sectionContent.classList.contains("info-message")){
+            sectionContent.classList.remove("info-message");
+        }
     }
 }
 
@@ -86,50 +91,20 @@ export function loadProjectsPage(projectsArray){
     sectionContent.innerHTML = "";
     headerContent.innerText = "Projects";
 
+
     if(projectsArray.length == 0) {
       noTasksAvailable("No projects created");
     }else{
-        projectsArray.forEach(task => {
-            let divTask = document.createElement("div");
-            let divName = document.createElement("div");
-            let divInfo = document.createElement("div");
-            let spanCircle = document.createElement("span");
-            let spanName = document.createElement("span");
-            let spanDueDate = document.createElement("span");
-            let spanPriority = document.createElement("span");
-            let spanProject = document.createElement("span");
-    
-            divTask.classList.add("task");
-            divName.classList.add("flex-task-name");
-            divInfo.classList.add("flex-task-info");
-            if(task.getStatus()){
-                spanCircle.classList.add("marked");
-            }else{
-                spanCircle.classList.add("circle-task");
-            }
-            if(sectionContent.classList.contains("info-message")){
-                sectionContent.classList.remove("info-message");
-            }
-            spanName.innerText = task.getTitle();
-            spanDueDate.innerText = task.getDueDate();
-            spanPriority.innerText = task.getPriority();
-            spanProject.innerText = task.getProject();
-    
-            divName.appendChild(spanCircle);
-            divName.appendChild(spanName);
-            divInfo.appendChild(spanDueDate);
-            divInfo.appendChild(spanPriority);
-            divInfo.appendChild(spanProject);
-            divTask.appendChild(divName);
-            divTask.appendChild(divInfo);
-            sectionContent.appendChild(divTask);
-
-            spanCircle.addEventListener("click",(e)=>{
-                markCompleted(e.target);
-                task.setStatus();
-            })
-
+        projectsArray.forEach(project => {
+            let pProject = document.createElement("p");
+            pProject.innerText = project;
+            pProject.classList.add("project-panel");
+            
+            sectionContent.appendChild(pProject);
         });
+        if(sectionContent.classList.contains("info-message")){
+            sectionContent.classList.remove("info-message");
+        }
     }
 }
 
