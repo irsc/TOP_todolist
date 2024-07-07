@@ -1,3 +1,5 @@
+import './dom-elements';
+
 export function showProjects(projectList){
     const divList = document.getElementById("projectList")
     divList.innerHTML = ""
@@ -83,6 +85,8 @@ export function loadPage(taskArray, title="All", message="No tasks pending"){
             sectionContent.classList.remove("info-message");
         }
     }
+    showTodoBtnPanel(true);
+    showProjectBtnPanel(false);
 }
 
 export function loadProjectsPage(projectsArray){
@@ -106,6 +110,27 @@ export function loadProjectsPage(projectsArray){
             sectionContent.classList.remove("info-message");
         }
     }
+    showTodoBtnPanel(false);
+    showProjectBtnPanel(true); 
+}
+
+function showTodoBtnPanel(show = true){
+    if(show){
+        newTodoBtnPanel.classList.add("visible");
+        newTodoBtnPanel.classList.remove("hidden");
+    }else{
+        newTodoBtnPanel.classList.add("hidden");
+        newTodoBtnPanel.classList.remove("visible");
+    }
+}
+function showProjectBtnPanel(show = false){
+    if(show){
+        newProjectBtnPanel.classList.add("visible");
+        newProjectBtnPanel.classList.remove("hidden");
+    }else{
+        newProjectBtnPanel.classList.add("hidden");
+        newProjectBtnPanel.classList.remove("visible");
+    }
 }
 
 function markCompleted(element){
@@ -119,3 +144,4 @@ function noTasksAvailable (message){
     sectionContent.classList.add("info-message");
 
 }
+

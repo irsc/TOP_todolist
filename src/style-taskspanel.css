@@ -70,3 +70,37 @@
     margin-right: 20px;
     background-color:lightgreen;
 }
+
+#sectionContent+div{
+    border-top: solid grey 1px;
+}
+
+#sectionContent~div{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.visible{
+    visibility: visible;
+    height: auto;
+}
+
+.hidden{
+    visibility: hidden;
+    height: 0px;
+}
+
+#newTodoBtnPanel, #newProjectBtnPanel{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 5px;
+    padding: 5px 15px 5px 0px;
+    background-color: transparent;
+    border: none;
+}
+#newTodoBtnPanel:hover, #newProjectBtnPanel:hover {
+    border-radius: 5px;
+    border: solid lightgreen 2px;
+    color: green;
+}

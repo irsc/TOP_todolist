@@ -1,12 +1,15 @@
 import { TodoList, Project, Task} from "./model";
-import { selectProject, showProjects, loadPage, loadProjectsPage } from "./view"; 
+import { selectProject, showProjects, loadPage, loadProjectsPage} from "./view"; 
 import './dom-elements';
 
+/******************************************/
+//Variables
 const TodoModel = new TodoList();
 const tasksProjects = new Project();
 
 //New todo modal
 const newTodoModal = document.getElementById("newTodoModal");
+const newTodoForm = document.getElementById("newTodoForm");
 const addTodoBtn = document.getElementById("addTodoBtn");
 const closeBtn = document.getElementById("closeBtn");
 const newTodoTitle = document.getElementById("title");
@@ -17,17 +20,17 @@ const newTodoProject = document.getElementById("project");
 const newTodoNotes = document.getElementById("notes");
 //New project Modal
 const newProjectModal = document.getElementById("newProjectModal");
+const newProjectForm = document.getElementById("newProjectForm");
 const newProjectTitle = document.getElementById("nameProject");
 const addProjectBtn = document.getElementById("addProjectBtn");
 const closeBtnProjectModal = document.getElementById("closeBtnProjectModal");
-//Todos panel
-const newTodoBtnPanel = document.getElementById("newTodoBtnPanel");
 
-
+/******************************************/
 //Listeners
 //Actions
 newTodoBtn.addEventListener("click", ()=>{
     newTodoModal.showModal();
+    newTodoForm.reset();
 });
 todoSearch.addEventListener("click", ()=>{
     searchPage();
@@ -45,12 +48,17 @@ todoUpcoming.addEventListener("click", ()=>{
 asideProjects.addEventListener("click", ()=>{
     allProjectsPage();
 });
+newProjectBtn.addEventListener("click", ()=>{
+    newProjectModal.showModal();
+    newProjectForm.reset();
+});
 
 newTodoBtnPanel.addEventListener("click", ()=>{
     newTodoModal.showModal();
 });
-
-
+newProjectBtnPanel.addEventListener("click", ()=>{
+    newProjectModal.showModal();
+});
 
 
 //Add task modal
@@ -65,13 +73,12 @@ closeBtn.addEventListener("click", ()=>{
 });
 
 //Add project & modal
-newProjectBtn.addEventListener("click", ()=>{
-    newProjectModal.showModal();
-});
 addProjectBtn.addEventListener("click", ()=>{
     if (newProjectTitle.checkValidity()){
         addNewProject(newProjectTitle.value);
-        newTodoModal.close();
+        newProjectModal.close();
+       
+        
     }
 }); 
 closeBtnProjectModal.addEventListener("click", ()=>{
@@ -84,20 +91,14 @@ function addNewTask(title, description, dueDate, priority, project, notes){
     let task = new Task(title, description, dueDate, priority, project, notes)
     TodoModel.addTask(task);
     loadPage(TodoModel.getAllTasks());
-    resetVariables();
 };
 
 function addNewProject(title){
     tasksProjects.addProject(title);
     showProjects(tasksProjects.getAllProjects());
     selectProject(tasksProjects.getAllProjects());
-
-    const newProject = document.getElementById(title);
-    newProject.addEventListener("click", ()=>{
-        byProjectPage(title);
-    });
     allProjectsPage();
-    resetVariables();
+    updateListenerAsideProject();
 };
 
 function searchPage(){
@@ -129,24 +130,21 @@ function allProjectsPage(){
     loadProjectsPage(tasksProjects.getAllProjects());
     let projectPanel = document.querySelectorAll(".project-panel");
     projectPanel.forEach(element => {
-        console.log(element);
       element.addEventListener('click', () => {
         byProjectPage(element.innerText)
       });
     });
 }
 
-function resetVariables(){
-    newTodoTitle.innerText = "";
-    newTodoDescription.innerText = "";
-    newTodoDueDate.innerText = "";
-    newTodoPriority.seletedIndex =  -1;
-    newTodoProject.seletedIndex =  -1;
-    newTodoNotes.innerText = "";
-    newProjectTitle.innerText = "";
+function updateListenerAsideProject(){
+    Array.from(projectList.children).forEach(project =>{
+        project.addEventListener("click", ()=>{
+            byProjectPage(project.id);
+        })
+    })
 }
 
-
+/******************************************/
 window.addEventListener("load", ()=>{
     showProjects(tasksProjects.getAllProjects());
     selectProject(tasksProjects.getAllProjects());
