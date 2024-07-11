@@ -1,5 +1,5 @@
 .sectionContent{
-    padding: 10px;
+    padding: 20px 20px 0px 20px;
 }
 .headerContent{
     color: darkred;
@@ -14,6 +14,7 @@
 
 .task{
     padding: 10px;
+    border-top: solid grey 1px;
 }
 
 .project-panel{
@@ -25,20 +26,49 @@
     text-shadow: grey;
 }
 
+.flex-task{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .flex-task-name{
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     padding: 10px 20px 5px;
-    border-top: solid grey 1px;
+    
 }
 .flex-task-info{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 5px 20px;
+    padding: 10px 20px;
     font-size: 0.75em;
     color: dimgray;
+    width: 50%;
+}
+
+.task-details{
+    padding: 5px 20px;
+}
+
+.flex-task-btns{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.flex-task-btns button{
+    padding: 5px;
+    width: 100px;
+
+}
+
+.flex-task-btns button:hover{
+    background-color: lightslategrey;
+    color: whitesmoke;
 }
 
 .circle-task{

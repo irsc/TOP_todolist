@@ -1,4 +1,6 @@
 import './dom-elements';
+import triangleDown  from './icons/triangle-down.svg';
+import triangleUp  from './icons/triangle-up.svg';
 
 export function showProjects(projectList){
     const divList = document.getElementById("projectList")
@@ -42,15 +44,25 @@ export function loadPage(taskArray, title="All", message="No tasks pending"){
             let divTask = document.createElement("div");
             let divName = document.createElement("div");
             let divInfo = document.createElement("div");
+            let divDetails = document.createElement("div");
+            let divDetailsContent = document.createElement("div");
+            let divDetailsButtons = document.createElement("div");
             let spanCircle = document.createElement("span");
             let spanName = document.createElement("span");
             let spanDueDate = document.createElement("span");
-            let spanPriority = document.createElement("span");
             let spanProject = document.createElement("span");
+            let spanIcon = document.createElement("span");
+            let iconSeeTask = new Image();
+            let btnDelete = document.createElement("button");
+            let btnEdit = document.createElement("button");
     
             divTask.classList.add("task");
+            divTask.classList.add("flex-task");
             divName.classList.add("flex-task-name");
             divInfo.classList.add("flex-task-info");
+            divDetails.classList.add("hidden");
+            divDetailsContent.classList.add("task-details");
+            divDetailsButtons.classList.add("flex-task-btns");
             if(task.getStatus()){
                 spanCircle.classList.add("marked");
             }else{
@@ -61,23 +73,47 @@ export function loadPage(taskArray, title="All", message="No tasks pending"){
             }else if(task.getPriority().toLowerCase() == "medium"){
                 spanCircle.classList.add("task-medium-priority");
             }
+            iconSeeTask.classList.add("icon");
             spanName.innerText = task.getTitle();
             spanDueDate.innerText = task.getDueDate();
-            spanPriority.innerText = task.getPriority();
             spanProject.innerText = task.getProject();
-    
+            iconSeeTask.src = triangleDown;
+            divDetailsContent.innerHTML = `
+            <p>Priority: ${task.getPriority()}</p>
+            <p>Description: ${task.getDescription()}</p>
+            <p>Other notes: ${task.getNotes()}</p>
+            `
+            btnEdit.innerText= "Edit";
+            btnDelete.innerText = "Delete";
+
+            spanIcon.appendChild(iconSeeTask);
+            divDetailsButtons.appendChild(btnEdit);
+            divDetailsButtons.appendChild(btnDelete);
             divName.appendChild(spanCircle);
             divName.appendChild(spanName);
             divInfo.appendChild(spanDueDate);
-            divInfo.appendChild(spanPriority);
             divInfo.appendChild(spanProject);
+            divInfo.appendChild(spanIcon);
+            divDetails.appendChild(divDetailsContent);
+            divDetails.appendChild(divDetailsButtons);
             divTask.appendChild(divName);
             divTask.appendChild(divInfo);
+            //divTask.appendChild(divDetails)
             sectionContent.appendChild(divTask);
+            sectionContent.appendChild(divDetails);
 
             spanCircle.addEventListener("click",(e)=>{
                 markCompleted(e.target);
                 task.setStatus();
+            })
+            spanIcon.addEventListener("click",(e)=>{
+                divDetails.classList.toggle("hidden");
+                if(iconSeeTask.src == triangleDown){
+                    iconSeeTask.src = triangleUp;
+                }else{
+                    iconSeeTask.src = triangleDown;
+                }
+                
             })
 
         });

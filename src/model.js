@@ -56,6 +56,9 @@ export class Task {
     getTitle(){
         return this.title;
     }
+    getDescription(){
+        return this.description;
+    }
     getProject(){
         return this.project;
     }
@@ -64,6 +67,9 @@ export class Task {
     }
     getPriority(){
         return this.priority;
+    }
+    getNotes(){
+        return this.notes;
     }
     getStatus(){
         return this.status;
