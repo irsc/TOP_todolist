@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To do List</title>
+<script defer src="index.bundle.js"></script></head>
+<body class="grid-body">
+    <aside class="flex-aside">
+        <div class="user flex-spacebt">
+            <div id="userPanel" class="aside-top">
+                <span>User</span>
+            
+            </div>
+            <div id="settingsPanel" class="aside-top"></div>
+        </div>
+        <div class="general actions-list">
+            
+            <button id="newTodoBtn"><span>Add Todo</span></button>
+            <button id="todoSearch"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+            <button id="todoToday">Today</button>
+            <button id="todoAll">All</button>
+            <button id="todoUpcoming">Upcoming</button>
+           
+        </div>
+        <div class="projects">
+            <h3 id="asideProjects">Projects</h3>
+            <div class="actions-list">
+                <button id="newProjectBtn"><span>Add Project</span></button>
+                <div id="projectList"></div>
+            </div>
+        </div>
+    </aside>
+    <dialog id="newTodoModal" class="itemModal">
+        <form id="newTodoForm" class="itemForm" method="dialog">
+            <legend>
+                <h2>New task to do</h2>
+            </legend>
+            <label for="title">Title:</label>
+            <input id="title" type="text" pattern="[A-zÀ-ú\s]{2,30}" required>
+            
+            <label for="description">Description:</label>
+            <input id="description" type="text" pattern="[A-zÀ-ú\s]{2,90}">
+            
+            <label for="dueDate">Due date:</label>
+            <input id="dueDate" type="date" required>
+
+            <label for="priority">Priority:</label>
+            <select name="priority" id="priority">
+                <option value="high">High</option>
+                <option value="medium" selected>Medium</option>
+                <option value="low">Low</option>
+            </select>
+
+            <label for="project">Project:</label>
+            <select name="project" id="project">
+            </select>
+
+            <label for="notes">Notes:</label>
+            <textarea name="notes" id="notes" class="notesModal" cols="30" rows="10" placeholder="Enter your notes here"></textarea>
+
+            <button type="reset"  id="closeBtn">Cancel</button>
+            <button id="addTodoBtn">Add new task</button>
+        
+        </form>
+
+    </dialog>
+    <dialog id="newProjectModal" class="itemModal">
+        <form id="newProjectForm" class ="itemForm" method="dialog">
+            <legend>
+                <h2>New Project</h2>
+            </legend>
+            <label for="nameProject">Name:</label>
+            <input id="nameProject" type="text" pattern="[A-zÀ-ú\s]{2,30}" required>
+            
+            <button type="reset"  id="closeBtnProjectModal">Cancel</button>
+            <button id="addProjectBtn">Add new project</button>
+        
+        </form>
+
+    </dialog>
+    <dialog id="editTodoModal" class="itemModal">
+        <form id="editTodoForm" class="itemForm" method="dialog">
+            <legend>
+                <h2>Edit task</h2>
+            </legend>
+            <span>Title:</span>
+            <span id="editTitle"></span>
+            <span>Description:</span>
+            <span id="editDescription" class="wrap-overflow"></span>
+            <span>Project:</span>
+            <span id="editProject"></span>
+
+            <label for="editDueDate">Change due date:</label>
+            <input id="editDueDate" type="date" required>
+
+            <label for="editPriority">Change priority:</label>
+            <select name="priority" id="editPriority">
+                <option value="high">High</option>
+                <option value="medium" selected>Medium</option>
+                <option value="low">Low</option>
+            </select>
+
+            <label for="editNotes">Add notes:</label>
+            <textarea name="notes" id="editNotes" class="notesModal" cols="30" rows="10" placeholder="Enter your notes here"></textarea>
+
+            <button type="reset"  id="closeEditBtn">Cancel</button>
+            <button id="saveChangesTodoBtn">Save changes</button>
+        
+        </form>
+
+    </dialog>
+    <main>
+        <nav id="navBar" class="flex-end"></nav>
+        <div id="content">
+            <header id="headerContent" class="headerContent"></header>
+            <section id="sectionContent" class="sectionContent"></section>
+            <div class="task">
+                <button id="newTodoBtnPanel"><span class="text-large">Add Todo</span></button>
+            </div>
+            <div>
+                <button id="newProjectBtnPanel"><span class="text-large">Add Project</span></button>
+            </div>
+        </div>
+    </main>
+</body>
+<script src="https://kit.fontawesome.com/4c536a6bd5.js" crossorigin="anonymous"></script>
+</html>
