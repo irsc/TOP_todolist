@@ -63,12 +63,7 @@
 .flex-task-btns button{
     padding: 5px;
     width: 100px;
-
-}
-
-.flex-task-btns button:hover{
-    background-color: lightslategrey;
-    color: whitesmoke;
+    background-color: lightgreen;
 }
 
 .circle-task{
@@ -101,6 +96,14 @@
     background-color:lightgreen;
 }
 
+.text-task{
+   color:darkgreen;
+}
+.text-done{
+    color: grey;
+    text-decoration: line-through;
+}
+
 #sectionContent+div{
     border-top: solid grey 1px;
 }
@@ -129,8 +132,12 @@
     background-color: transparent;
     border: none;
 }
-#newTodoBtnPanel:hover, #newProjectBtnPanel:hover {
+.flex-task-btns button:hover, #newTodoBtnPanel:hover, #newProjectBtnPanel:hover {
     border-radius: 5px;
     border: solid lightgreen 2px;
     color: green;
+}
+
+.deleteBtn{
+    color: red;
 }

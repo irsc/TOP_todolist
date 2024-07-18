@@ -6,10 +6,40 @@ export class TodoList {
         this.tasks = [];
     }
     getAllTasks() {
-        return this.tasks;
+        const tasksList = this.tasks.sort((a, b) =>{
+            const dateA = a.getDueDate(); 
+            const dateB = b.getDueDate(); 
+            if (dateA < dateB) {
+              return -1;
+            }
+            if (dateA > dateB) {
+              return 1;
+            }
+            return 0;
+        });
+        return tasksList;
     }
     addTask(task) {
         this.tasks.push(task);
+    }
+
+    removeTask(taskTitle){
+        let index = this.findTaskIndex(taskTitle);
+        if (index > -1) { 
+            this.tasks.splice(index, 1);
+          }
+    }
+
+    updateTask(taskTitle, newDueDate, newPriority, newNotes){
+        let index = this.findTaskIndex(taskTitle);
+        let task = this.tasks[index];
+        task.setDueDate(newDueDate);
+        task.setPriority(newPriority);
+        task.setNotes(newNotes);
+    }
+
+    findTaskIndex(taskTitle){
+        return this.tasks.findIndex((element) => element.getTitle() == taskTitle);
     }
 
     getTaskByProject(projectTitle){
@@ -81,6 +111,15 @@ export class Task {
         }else{
             this.status = true;
         }
+    }
+    setDueDate(newDueDate){
+        this.dueDate = format(newDueDate,"yyyy-MM-dd");
+    }
+    setPriority(priority){
+        this.priority = priority;
+    }
+    setNotes(notes){
+        this.notes = notes;
     }
 };
 

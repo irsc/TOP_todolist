@@ -7,8 +7,7 @@ import './dom-elements';
 const TodoModel = new TodoList();
 const tasksProjects = new Project();
 
-//New todo modal
-const newTodoModal = document.getElementById("newTodoModal");
+//New todo form
 const newTodoForm = document.getElementById("newTodoForm");
 const addTodoBtn = document.getElementById("addTodoBtn");
 const closeBtn = document.getElementById("closeBtn");
@@ -18,12 +17,14 @@ const newTodoDueDate = document.getElementById("dueDate");
 const newTodoPriority = document.getElementById("priority");
 const newTodoProject = document.getElementById("project");
 const newTodoNotes = document.getElementById("notes");
-//New project Modal
-const newProjectModal = document.getElementById("newProjectModal");
+//New project form
 const newProjectForm = document.getElementById("newProjectForm");
 const newProjectTitle = document.getElementById("nameProject");
 const addProjectBtn = document.getElementById("addProjectBtn");
 const closeBtnProjectModal = document.getElementById("closeBtnProjectModal");
+//Edittodo form
+const saveChangesTodoBtn = document.getElementById("saveChangesTodoBtn");
+const closeEditBtn = document.getElementById("closeEditBtn");
 
 /******************************************/
 //Listeners
@@ -55,10 +56,17 @@ newProjectBtn.addEventListener("click", ()=>{
 
 newTodoBtnPanel.addEventListener("click", ()=>{
     newTodoModal.showModal();
+    newTodoForm.reset();
+    if(tasksProjects.getAllProjects().includes(headerContent.innerText)){
+        console.log
+        newTodoProject.value = headerContent.innerText;
+    }
 });
 newProjectBtnPanel.addEventListener("click", ()=>{
     newProjectModal.showModal();
+    newProjectForm.reset();
 });
+
 
 
 //Add task modal
@@ -66,6 +74,7 @@ addTodoBtn.addEventListener("click", ()=>{
     if ( newTodoTitle.checkValidity()& newTodoDescription.checkValidity() & newTodoDueDate.checkValidity()){
         addNewTask(newTodoTitle.value, newTodoDescription.value, newTodoDueDate.value, newTodoPriority.value, newTodoProject.value, newTodoNotes.value);
         newTodoModal.close();
+        updatePage();
     }
 }); 
 closeBtn.addEventListener("click", ()=>{
@@ -78,11 +87,22 @@ addProjectBtn.addEventListener("click", ()=>{
         addNewProject(newProjectTitle.value);
         newProjectModal.close();
        
-        
     }
 }); 
 closeBtnProjectModal.addEventListener("click", ()=>{
     newProjectModal.close();
+});
+
+//Edit task modal
+saveChangesTodoBtn.addEventListener("click", ()=>{
+    if (newTodoDueDate.checkValidity()){
+        TodoModel.updateTask(editTitle.innerText, editDueDate.value, editPriority.value, editNotes.value);
+        editTodoModal.close();
+        updatePage();
+    }
+}); 
+closeEditBtn.addEventListener("click", ()=>{
+    editTodoModal.close();
 });
 
 /******************************************/ 
@@ -90,7 +110,6 @@ closeBtnProjectModal.addEventListener("click", ()=>{
 function addNewTask(title, description, dueDate, priority, project, notes){
     let task = new Task(title, description, dueDate, priority, project, notes)
     TodoModel.addTask(task);
-    loadPage(TodoModel.getAllTasks());
 };
 
 function addNewProject(title){
@@ -101,28 +120,29 @@ function addNewProject(title){
     updateListenerAsideProject();
 };
 
+export function deleteTask(title){
+    return TodoModel.removeTask(title);
+}
+
 function searchPage(){
     console.log("search something");
 };
 
 function todayPage(){
-    let lista = TodoModel.getTodayTasks();
-    loadPage(lista,"Today","No tasks for today");
+    loadPage(TodoModel.getTodayTasks(),"Today","No tasks for today");
 };
 
 function allPage(){
-    let lista = TodoModel.getAllTasks();
-    loadPage(lista);
+    loadPage(TodoModel.getAllTasks());
 };
 
 function upcomingPage(){
-    let lista = TodoModel.getUpcomingTasks();
-    loadPage(lista,"Upcoming","No upcoming tasks");
+    loadPage(TodoModel.getUpcomingTasks(),"Upcoming","No upcoming tasks");
 };
 
 function byProjectPage(project){
     let lista = TodoModel.getTaskByProject(project);
-    let title = "Project " +  project;
+    let title = project;
     loadPage(lista,title,"No task assigned to this project");
 };
 
@@ -136,6 +156,23 @@ function allProjectsPage(){
     });
 }
 
+export function updatePage(){
+    switch (headerContent.innerText) {
+        case "Today":
+            todayPage();
+            break;
+        case "All":
+            allPage();
+            break;
+        case "Upcoming":
+            upcomingPage();
+            break;
+        default:
+            byProjectPage(headerContent.innerText);
+            break;
+    }
+}
+
 function updateListenerAsideProject(){
     Array.from(projectList.children).forEach(project =>{
         project.addEventListener("click", ()=>{
@@ -143,6 +180,7 @@ function updateListenerAsideProject(){
         })
     })
 }
+
 
 /******************************************/
 window.addEventListener("load", ()=>{

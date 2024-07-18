@@ -9,12 +9,11 @@
 <body class="grid-body">
     <aside class="flex-aside">
         <div class="user flex-spacebt">
-            <div>
-                <img src="" alt="">image
-                <p>Fulanito</p>
+            <div id="userPanel" class="aside-top">
+                <span>User</span>
             
             </div>
-            <div> icon icon</div>
+            <div id="settingsPanel" class="aside-top"></div>
         </div>
         <div class="general actions-list">
             
@@ -33,8 +32,8 @@
             </div>
         </div>
     </aside>
-    <dialog id="newTodoModal" class="newItemModal">
-        <form id="newTodoForm" class="newItemForm" method="dialog">
+    <dialog id="newTodoModal" class="itemModal">
+        <form id="newTodoForm" class="itemForm" method="dialog">
             <legend>
                 <h2>New task to do</h2>
             </legend>
@@ -59,7 +58,7 @@
             </select>
 
             <label for="notes">Notes:</label>
-            <textarea name="notes" id="notes" cols="30" rows="10" placeholder="Enter your notes here"></textarea>
+            <textarea name="notes" id="notes" class="notesModal" cols="30" rows="10" placeholder="Enter your notes here"></textarea>
 
             <button type="reset"  id="closeBtn">Cancel</button>
             <button id="addTodoBtn">Add new task</button>
@@ -67,8 +66,8 @@
         </form>
 
     </dialog>
-    <dialog id="newProjectModal" class="newItemModal">
-        <form id="newProjectForm" class ="newItemForm" method="dialog">
+    <dialog id="newProjectModal" class="itemModal">
+        <form id="newProjectForm" class ="itemForm" method="dialog">
             <legend>
                 <h2>New Project</h2>
             </legend>
@@ -81,8 +80,39 @@
         </form>
 
     </dialog>
+    <dialog id="editTodoModal" class="itemModal">
+        <form id="editTodoForm" class="itemForm" method="dialog">
+            <legend>
+                <h2>Edit task</h2>
+            </legend>
+            <span>Title:</span>
+            <span id="editTitle"></span>
+            <span>Description:</span>
+            <span id="editDescription" class="wrap-overflow"></span>
+            <span>Project:</span>
+            <span id="editProject"></span>
+
+            <label for="editDueDate">Change due date:</label>
+            <input id="editDueDate" type="date" required>
+
+            <label for="editPriority">Change priority:</label>
+            <select name="priority" id="editPriority">
+                <option value="high">High</option>
+                <option value="medium" selected>Medium</option>
+                <option value="low">Low</option>
+            </select>
+
+            <label for="editNotes">Add notes:</label>
+            <textarea name="notes" id="editNotes" class="notesModal" cols="30" rows="10" placeholder="Enter your notes here"></textarea>
+
+            <button type="reset"  id="closeEditBtn">Cancel</button>
+            <button id="saveChangesTodoBtn">Save changes</button>
+        
+        </form>
+
+    </dialog>
     <main>
-        <nav id="nav" class="flex-end"> Filter</nav>
+        <nav id="navBar" class="flex-end"></nav>
         <div id="content">
             <header id="headerContent" class="headerContent"></header>
             <section id="sectionContent" class="sectionContent"></section>

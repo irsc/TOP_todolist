@@ -1,6 +1,7 @@
 import './dom-elements';
 import triangleDown  from './icons/triangle-down.svg';
 import triangleUp  from './icons/triangle-up.svg';
+import { deleteTask, updatePage } from './controller';
 
 export function showProjects(projectList){
     const divList = document.getElementById("projectList")
@@ -32,8 +33,6 @@ export function selectProject(projectsArray){
 }
 
 export function loadPage(taskArray, title="All", message="No tasks pending"){
-    const headerContent = document.getElementById("headerContent");
-    const sectionContent = document.getElementById("sectionContent");
     sectionContent.innerHTML = "";
     headerContent.innerText = title;
 
@@ -65,8 +64,10 @@ export function loadPage(taskArray, title="All", message="No tasks pending"){
             divDetailsButtons.classList.add("flex-task-btns");
             if(task.getStatus()){
                 spanCircle.classList.add("marked");
+                spanName.classList.add("text-done");
             }else{
                 spanCircle.classList.add("circle-task");
+                spanName.classList.add("text-task");
             }
             if(task.getPriority().toLowerCase() == "high"){
                 spanCircle.classList.add("task-high-priority");
@@ -74,6 +75,7 @@ export function loadPage(taskArray, title="All", message="No tasks pending"){
                 spanCircle.classList.add("task-medium-priority");
             }
             iconSeeTask.classList.add("icon");
+            btnDelete.classList.add("deleteBtn");
             spanName.innerText = task.getTitle();
             spanDueDate.innerText = task.getDueDate();
             spanProject.innerText = task.getProject();
@@ -85,6 +87,7 @@ export function loadPage(taskArray, title="All", message="No tasks pending"){
             `
             btnEdit.innerText= "Edit";
             btnDelete.innerText = "Delete";
+            btnDelete.dataset.title = task.getTitle();
 
             spanIcon.appendChild(iconSeeTask);
             divDetailsButtons.appendChild(btnEdit);
@@ -102,8 +105,10 @@ export function loadPage(taskArray, title="All", message="No tasks pending"){
             sectionContent.appendChild(divTask);
             sectionContent.appendChild(divDetails);
 
-            spanCircle.addEventListener("click",(e)=>{
-                markCompleted(e.target);
+            divName.addEventListener("click",(e)=>{
+                spanCircle.classList.toggle("marked");
+                spanCircle.classList.toggle("circle-task");
+                spanName.classList.toggle("text-done");
                 task.setStatus();
             })
             spanIcon.addEventListener("click",(e)=>{
@@ -113,8 +118,16 @@ export function loadPage(taskArray, title="All", message="No tasks pending"){
                 }else{
                     iconSeeTask.src = triangleDown;
                 }
-                
             })
+            btnDelete.addEventListener("click",()=>{
+                deleteTask(task.getTitle());
+                updatePage();
+            });
+            btnEdit.addEventListener("click",()=>{
+                editTodoModal.showModal();
+                updateTaskData(task.getTitle(), task.getDescription(), task.getProject(), task.getDueDate(), task.getPriority(), task.getNotes());
+            });
+        
 
         });
         if(sectionContent.classList.contains("info-message")){
@@ -170,14 +183,34 @@ function showProjectBtnPanel(show = false){
 }
 
 function markCompleted(element){
-    element.classList.toggle("marked");
-    element.classList.toggle("circle-task");
+    console.log(element);
+    element.children[0].classList.toggle("marked");
+    element.childre[0].classList.toggle("circle-task");
+    element.children[1].classList.toggle("text-done");
 }
 
 function noTasksAvailable (message){
     const sectionContent = document.getElementById("sectionContent");
     sectionContent.innerText = message;
     sectionContent.classList.add("info-message");
+
+}
+
+function updateTaskData(title, description, project, date, priority, notes){
+    editTitle.innerText = title;
+    if(description == ""){
+        editDescription.innerText = "(None)";
+    }else{
+        editDescription.innerText = description;
+    }
+    if(project == ""){
+        editProject.innerText = "(None)";
+    }else{
+        editProject.innerText =  project;
+    }
+    editDueDate.value = date;
+    editPriority.value = priority;
+    editNotes.value =  notes;
 
 }
 

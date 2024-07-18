@@ -9,6 +9,9 @@ aside{
 main{
     height: 100vh;
 }
+nav{
+    padding:10px;
+}
 
 h3{
     margin-bottom: 0;
@@ -41,10 +44,20 @@ ul{
 .flex-spacebt{
     display: flex;
     justify-content: space-between;
+    padding: 10px;
 }
 .flex-end{
     display: flex;
     justify-content: flex-end;
+}
+
+.aside-top{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .actions-list{
