@@ -1,6 +1,7 @@
 import { TodoList, Project, Task} from "./model";
 import { selectProject, showProjects, loadPage, loadProjectsPage} from "./view"; 
 import './dom-elements';
+import { addTaskStorage, addProjectStorage, checkStorage } from "./localStorage";
 
 /******************************************/
 //Variables
@@ -72,7 +73,8 @@ newProjectBtnPanel.addEventListener("click", ()=>{
 //Add task modal
 addTodoBtn.addEventListener("click", ()=>{
     if ( newTodoTitle.checkValidity()& newTodoDescription.checkValidity() & newTodoDueDate.checkValidity()){
-        addNewTask(newTodoTitle.value, newTodoDescription.value, newTodoDueDate.value, newTodoPriority.value, newTodoProject.value, newTodoNotes.value);
+        addNewTask(newTodoTitle.value, newTodoDescription.value, newTodoDueDate.value, newTodoPriority.value, newTodoProject.value, newTodoNotes.value, false);
+        updateStorage();
         newTodoModal.close();
         updatePage();
     }
@@ -85,6 +87,7 @@ closeBtn.addEventListener("click", ()=>{
 addProjectBtn.addEventListener("click", ()=>{
     if (newProjectTitle.checkValidity()){
         addNewProject(newProjectTitle.value);
+        updateStorage();
         newProjectModal.close();
        
     }
@@ -95,10 +98,11 @@ closeBtnProjectModal.addEventListener("click", ()=>{
 
 //Edit task modal
 saveChangesTodoBtn.addEventListener("click", ()=>{
-    if (newTodoDueDate.checkValidity()){
+    if (editDueDate.checkValidity()){
         TodoModel.updateTask(editTitle.innerText, editDueDate.value, editPriority.value, editNotes.value);
         editTodoModal.close();
         updatePage();
+        updateStorage();
     }
 }); 
 closeEditBtn.addEventListener("click", ()=>{
@@ -107,8 +111,8 @@ closeEditBtn.addEventListener("click", ()=>{
 
 /******************************************/ 
 //Functions
-function addNewTask(title, description, dueDate, priority, project, notes){
-    let task = new Task(title, description, dueDate, priority, project, notes)
+function addNewTask(title, description, dueDate, priority, project, notes, status){
+    let task = new Task(title, description, dueDate, priority, project, notes, status)
     TodoModel.addTask(task);
 };
 
@@ -120,7 +124,7 @@ function addNewProject(title){
     updateListenerAsideProject();
 };
 
-export function deleteTask(title){
+function deleteTask(title){
     return TodoModel.removeTask(title);
 }
 
@@ -156,7 +160,7 @@ function allProjectsPage(){
     });
 }
 
-export function updatePage(){
+function updatePage(){
     switch (headerContent.innerText) {
         case "Today":
             todayPage();
@@ -181,10 +185,19 @@ function updateListenerAsideProject(){
     })
 }
 
+function updateStorage(){
+    addProjectStorage(tasksProjects.getAllProjects());
+    addTaskStorage(TodoModel.getAllTasks());
+}
+
 
 /******************************************/
 window.addEventListener("load", ()=>{
+    checkStorage();
     showProjects(tasksProjects.getAllProjects());
     selectProject(tasksProjects.getAllProjects());
     loadPage(TodoModel.getAllTasks());
+    updateListenerAsideProject();
 });
+
+export {addNewTask, addNewProject, deleteTask, updatePage, updateStorage}

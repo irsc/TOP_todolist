@@ -5,3 +5,4 @@ import './styles-icons';
 import './model';
 import './view';
 import './controller';
+import './localStorage';

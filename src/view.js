@@ -1,7 +1,7 @@
 import './dom-elements';
 import triangleDown  from './icons/triangle-down.svg';
 import triangleUp  from './icons/triangle-up.svg';
-import { deleteTask, updatePage } from './controller';
+import { deleteTask, updatePage, updateStorage } from './controller';
 
 export function showProjects(projectList){
     const divList = document.getElementById("projectList")
@@ -110,6 +110,7 @@ export function loadPage(taskArray, title="All", message="No tasks pending"){
                 spanCircle.classList.toggle("circle-task");
                 spanName.classList.toggle("text-done");
                 task.setStatus();
+                updateStorage();
             })
             spanIcon.addEventListener("click",(e)=>{
                 divDetails.classList.toggle("hidden");
@@ -121,6 +122,7 @@ export function loadPage(taskArray, title="All", message="No tasks pending"){
             })
             btnDelete.addEventListener("click",()=>{
                 deleteTask(task.getTitle());
+                updateStorage();
                 updatePage();
             });
             btnEdit.addEventListener("click",()=>{
@@ -182,12 +184,6 @@ function showProjectBtnPanel(show = false){
     }
 }
 
-function markCompleted(element){
-    console.log(element);
-    element.children[0].classList.toggle("marked");
-    element.childre[0].classList.toggle("circle-task");
-    element.children[1].classList.toggle("text-done");
-}
 
 function noTasksAvailable (message){
     const sectionContent = document.getElementById("sectionContent");
