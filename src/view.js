@@ -210,3 +210,7 @@ function updateTaskData(title, description, project, date, priority, notes){
 
 }
 
+function searchTaskByTitle(title){
+
+    
+}
